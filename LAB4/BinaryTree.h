@@ -5,7 +5,7 @@
 #include <queue>
 using namespace std;
 
-// PART 4 (task
+// PART 4 (task 18)
 
 struct BNode {
 	int value;
@@ -42,7 +42,7 @@ void printLevelOrder(BNode* broot) {
 	}
 }
 
-/// PART 5  (task 
+/// PART 5  (task 21)
 
 void preOrder(BNode* broot, vector<int>& result) {
 	if (!broot) return;
