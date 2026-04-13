@@ -15,7 +15,7 @@ public:
 	}
 };
 
-///// PART 1 (task 
+///// PART 1 (task 2 and 3)
 
 NNode* getNodeByPath(NNode* nroot, const vector<int>& path) {
 	NNode* current = nroot;
@@ -44,7 +44,6 @@ vector<int> getPath(NNode* nroot, int value) {
 		return path;
 }
 
-//// PART 2 (task
 
 void addNode(NNode* nroot, int value, const vector<int>& parentPath) {
 	NNode* parent = getNodeByPath(nroot, parentPath);
@@ -56,7 +55,7 @@ void addNode(NNode* nroot, int value, const vector<int>& parentPath) {
 	}
 }
 
-//// PART 3 (task 
+//// PART 2 (task 9)
 
 void printLevelOrder(NNode* nroot) {
 	if (!nroot) return;
@@ -75,7 +74,7 @@ void printLevelOrder(NNode* nroot) {
 	}
 }
 
-//// PART 4 (task 
+//// PART 3 (task 14)
 
 NNode* removeNode(NNode* nnode, int value) {
 	if (!nnode) return nullptr;
