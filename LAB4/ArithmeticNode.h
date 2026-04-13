@@ -4,6 +4,8 @@
 #include <cmath>
 using namespace std;
 
+/// PART 6 (task 22)
+
 enum NodeType {
 	CONST, VAR, OP
 };
