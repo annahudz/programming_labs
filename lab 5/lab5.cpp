@@ -1,11 +1,11 @@
 /*
-Блок 0: (1, 2
-Блок 1: 5, 6), 7
-Блок 2: 11
-Блок 3: 14, 15
-Блок 4: 18
-Блок 5: 19
-Блок 6: 21
+Block 0: (1, 2
+Block 1: 5, 6), 7
+Block 2: 11
+Block 3: 14, 15
+Block 4: 18
+Block 5: 19
+Block 6: 21
 */
 
 #include <iostream>
@@ -66,7 +66,7 @@ public:
         return *this;
     }
 
-    //Додавання ребра
+    //Г„Г®Г¤Г ГўГ Г­Г­Гї Г°ГҐГЎГ°Г 
     void add_edge(int u, int v, double weight) {
         if (u >= 0 && u < num_vertex && v >= 0 && v < num_vertex && !edge_exists(u, v)) {
             adj_list[u].push_back(std::make_pair(v, weight));
@@ -78,7 +78,7 @@ public:
         }
     }
 
-    //Видалення ребра
+    //Г‚ГЁГ¤Г Г«ГҐГ­Г­Гї Г°ГҐГЎГ°Г 
     void remove_edge(int u, int v) {
         if (u >= 0 && u < num_vertex && v >= 0 && v < num_vertex) {
             adj_list[u].remove_if([&](const std::pair<int, double>& element) {
@@ -94,7 +94,7 @@ public:
         }
     }
 
-    //Вивід графу 
+    //Г‚ГЁГўВіГ¤ ГЈГ°Г ГґГі 
     void print_graph() {
         for (int i = 0; i < num_vertex; ++i) {
             std::cout << "Adjacency list of vertex " << i << ": ";
@@ -108,7 +108,7 @@ public:
         }
     }
 
-    //Створення випадковго графу з n вершинами
+    //Г‘ГІГўГ®Г°ГҐГ­Г­Гї ГўГЁГЇГ Г¤ГЄГ®ГўГЈГ® ГЈГ°Г ГґГі Г§ n ГўГҐГ°ГёГЁГ­Г Г¬ГЁ
     void create_random_graph(int n, double max_weight) {
         int edges_added = 0;
         while (edges_added < n) {
@@ -124,7 +124,7 @@ public:
     }
 
 
-    //Перевірка чи граф зв'язний
+    //ГЏГҐГ°ГҐГўВіГ°ГЄГ  Г·ГЁ ГЈГ°Г Гґ Г§Гў'ГїГ§Г­ГЁГ©
     bool is_connected() {
         if (directed) {
             std::cout << "Is directed graph.\n";
@@ -140,7 +140,7 @@ public:
         return true;
     }
 
-    //Пошук компонент зв'язності
+    //ГЏГ®ГёГіГЄ ГЄГ®Г¬ГЇГ®Г­ГҐГ­ГІ Г§Гў'ГїГ§Г­Г®Г±ГІВі
     void find_connected_components(bool benchmark = false) {
         if (directed) {
             std::cout << "Is directed graph.\n";
@@ -167,7 +167,7 @@ public:
         }
     }
 
-    //Перевірка графа на ациклічність
+    //ГЏГҐГ°ГҐГўВіГ°ГЄГ  ГЈГ°Г ГґГ  Г­Г  Г Г¶ГЁГЄГ«ВіГ·Г­ВіГ±ГІГј
     bool is_acyclic() {
         if (!directed) {
             std::cout << "Is undirected graph.\n";
@@ -184,7 +184,7 @@ public:
         return !has_cycle;
     }
 
-    //Пошук в глибину 
+    //ГЏГ®ГёГіГЄ Гў ГЈГ«ГЁГЎГЁГ­Гі 
     void DFS(int start_vertex = 0, bool benchmark = false) {
         std::vector<bool> visited(num_vertex, false);
         DFS_util(start_vertex, visited, benchmark);
@@ -193,7 +193,7 @@ public:
         }
     }
 
-    //Пошук в глибину за найменшою вагою ребра
+    //ГЏГ®ГёГіГЄ Гў ГЈГ«ГЁГЎГЁГ­Гі Г§Г  Г­Г Г©Г¬ГҐГ­ГёГ®Гѕ ГўГ ГЈГ®Гѕ Г°ГҐГЎГ°Г 
     void dfs_min_weight(bool benchmark = false) {
         std::vector<bool> visited(num_vertex, false);
         for (int i = 0; i < num_vertex; i++) {
@@ -204,7 +204,7 @@ public:
         if (!benchmark) std::cout << std::endl;
     }
 
-    //Алгорит Дейкстри для пошуку найменшої відстані між однією вершиною з усіма іншими
+    //ГЂГ«ГЈГ®Г°ГЁГІ Г„ГҐГ©ГЄГ±ГІГ°ГЁ Г¤Г«Гї ГЇГ®ГёГіГЄГі Г­Г Г©Г¬ГҐГ­ГёГ®Вї ГўВіГ¤Г±ГІГ Г­Ві Г¬ВіГ¦ Г®Г¤Г­ВіВєГѕ ГўГҐГ°ГёГЁГ­Г®Гѕ Г§ ГіГ±ВіГ¬Г  ВіГ­ГёГЁГ¬ГЁ
     void dijkstra(int source, bool benchmark = false) {
         std::vector<double> dist(num_vertex, INF);
         std::queue<int> Q;
@@ -238,7 +238,7 @@ public:
 
     }
 
-    //Топологічне сортування
+    //Г’Г®ГЇГ®Г«Г®ГЈВіГ·Г­ГҐ Г±Г®Г°ГІГіГўГ Г­Г­Гї
     void topological_sort(bool benchmark = false) {
         if (!directed) {
             std::cout << "Is undirected graph.\n";
@@ -260,7 +260,7 @@ public:
         }
     }
 
-    //Алгоритм побудови кістякового дерева за допомогою пошука в глибину
+    //ГЂГ«ГЈГ®Г°ГЁГІГ¬ ГЇГ®ГЎГіГ¤Г®ГўГЁ ГЄВіГ±ГІГїГЄГ®ГўГ®ГЈГ® Г¤ГҐГ°ГҐГўГ  Г§Г  Г¤Г®ГЇГ®Г¬Г®ГЈГ®Гѕ ГЇГ®ГёГіГЄГ  Гў ГЈГ«ГЁГЎГЁГ­Гі
     void build_spanning_forest(adj_list_graph& forest) {
         forest.num_vertex = num_vertex;
         forest.adj_list = new std::list<std::pair<int, double>>[num_vertex];
@@ -278,7 +278,7 @@ public:
         }
     }
 
-    //Алгоритм Крускала для побудови кістякового дерева найменшої ваги
+    //ГЂГ«ГЈГ®Г°ГЁГІГ¬ ГЉГ°ГіГ±ГЄГ Г«Г  Г¤Г«Гї ГЇГ®ГЎГіГ¤Г®ГўГЁ ГЄВіГ±ГІГїГЄГ®ГўГ®ГЈГ® Г¤ГҐГ°ГҐГўГ  Г­Г Г©Г¬ГҐГ­ГёГ®Вї ГўГ ГЈГЁ
     void kruskal(bool benchmark = false) {
         if (!is_connected()) {
             std::cout << "Graph isn`t connected.\n";
@@ -306,7 +306,7 @@ public:
     }
 
 private:
-    //Допоміжна функція перевірки існування ребра (додавання та видалення ребра)
+    //Г„Г®ГЇГ®Г¬ВіГ¦Г­Г  ГґГіГ­ГЄГ¶ВіГї ГЇГҐГ°ГҐГўВіГ°ГЄГЁ ВіГ±Г­ГіГўГ Г­Г­Гї Г°ГҐГЎГ°Г  (Г¤Г®Г¤Г ГўГ Г­Г­Гї ГІГ  ГўГЁГ¤Г Г«ГҐГ­Г­Гї Г°ГҐГЎГ°Г )
     bool edge_exists(int u, int v) {
         if (u >= num_vertex || v >= num_vertex)
             return false;
@@ -319,7 +319,7 @@ private:
         return false;
     }
 
-    //Допоміжна функція для проходу графа в глибину за вагою ребра
+    //Г„Г®ГЇГ®Г¬ВіГ¦Г­Г  ГґГіГ­ГЄГ¶ВіГї Г¤Г«Гї ГЇГ°Г®ГµГ®Г¤Гі ГЈГ°Г ГґГ  Гў ГЈГ«ГЁГЎГЁГ­Гі Г§Г  ГўГ ГЈГ®Гѕ Г°ГҐГЎГ°Г 
     void dfs_min_weight_helper(std::vector<bool>& visited, int v, int prev_vertex, double prev_weight, bool benchmark) {
         visited[v] = true;
         if (!benchmark)std::cout << v << " ";
@@ -336,7 +336,7 @@ private:
         }
     }
 
-    //Пошук ребра мінімальної ваги
+    //ГЏГ®ГёГіГЄ Г°ГҐГЎГ°Г  Г¬ВіГ­ВіГ¬Г Г«ГјГ­Г®Вї ГўГ ГЈГЁ
     std::pair<int, double> find_min_weight_edge(int v, int prev_vertex, double prev_weight) {
         std::pair<int, double> min_edge = std::make_pair(-1, INF);
 
@@ -349,7 +349,7 @@ private:
         return min_edge;
     }
 
-    //Допоміжна функція для перевірки ациклічності орієнтованого графа, пошук циклу
+    //Г„Г®ГЇГ®Г¬ВіГ¦Г­Г  ГґГіГ­ГЄГ¶ВіГї Г¤Г«Гї ГЇГҐГ°ГҐГўВіГ°ГЄГЁ Г Г¶ГЁГЄГ«ВіГ·Г­Г®Г±ГІВі Г®Г°ВіВєГ­ГІГ®ГўГ Г­Г®ГЈГ® ГЈГ°Г ГґГ , ГЇГ®ГёГіГЄ Г¶ГЁГЄГ«Гі
     void dfs_cycle(std::vector<int>& visited, int v, bool& has_cycle) {
         visited[v] = 1;
 
@@ -364,7 +364,7 @@ private:
         visited[v] = 2;
     }
 
-    //Допоміжна функція для пошуку компонент зв'язності
+    //Г„Г®ГЇГ®Г¬ВіГ¦Г­Г  ГґГіГ­ГЄГ¶ВіГї Г¤Г«Гї ГЇГ®ГёГіГЄГі ГЄГ®Г¬ГЇГ®Г­ГҐГ­ГІ Г§Гў'ГїГ§Г­Г®Г±ГІВі
     void dfs_connected_components(int v, std::vector<bool>& visited, std::vector<int>& component) {
         visited[v] = true;
         component.push_back(v);
@@ -375,7 +375,7 @@ private:
         }
     }
 
-    //Допоміжна функція для перевірки зв'язності
+    //Г„Г®ГЇГ®Г¬ВіГ¦Г­Г  ГґГіГ­ГЄГ¶ВіГї Г¤Г«Гї ГЇГҐГ°ГҐГўВіГ°ГЄГЁ Г§Гў'ГїГ§Г­Г®Г±ГІВі
     void dfs_connected(int v, std::vector<bool>& visited) {
         visited[v] = true;
         for (auto neighbor : adj_list[v]) {
@@ -385,7 +385,7 @@ private:
         }
     }
 
-    //Допоміжна функція для топологічного сортування
+    //Г„Г®ГЇГ®Г¬ВіГ¦Г­Г  ГґГіГ­ГЄГ¶ВіГї Г¤Г«Гї ГІГ®ГЇГ®Г«Г®ГЈВіГ·Г­Г®ГЈГ® Г±Г®Г°ГІГіГўГ Г­Г­Гї
     void topologica_sort_util(int v, std::vector<bool>& visited, std::stack<int>& Stack) {
         visited[v] = true;
 
@@ -398,7 +398,7 @@ private:
         Stack.push(v);
     }
 
-    //Допоміжна функція для побудови простого кістякового дерева
+    //Г„Г®ГЇГ®Г¬ВіГ¦Г­Г  ГґГіГ­ГЄГ¶ВіГї Г¤Г«Гї ГЇГ®ГЎГіГ¤Г®ГўГЁ ГЇГ°Г®Г±ГІГ®ГЈГ® ГЄВіГ±ГІГїГЄГ®ГўГ®ГЈГ® Г¤ГҐГ°ГҐГўГ 
     void build_spanning_forest_dfs(int start, std::vector<bool>& visited, adj_list_graph& forest) {
         visited[start] = true;
         for (auto& neighbor : adj_list[start]) {
@@ -410,7 +410,7 @@ private:
         }
     }
 
-    //Функція для отримання усіх ребр графа
+    //Г”ГіГ­ГЄГ¶ВіГї Г¤Г«Гї Г®ГІГ°ГЁГ¬Г Г­Г­Гї ГіГ±ВіГµ Г°ГҐГЎГ° ГЈГ°Г ГґГ 
     std::vector<edge> get_edges() {
         std::vector<edge> edges;
         for (int i = 0; i < num_vertex; ++i) {
@@ -475,7 +475,7 @@ public:
         return *this;
     }
 
-    //Додавання ребра до графу
+    //Г„Г®Г¤Г ГўГ Г­Г­Гї Г°ГҐГЎГ°Г  Г¤Г® ГЈГ°Г ГґГі
     void add_edge(int u, int v, double weight) {
         if (u >= 0 && u < num_vertex && v >= 0 && v < num_vertex && !edge_exists(u, v)) {
             adj_matrix[u][v] = weight;
@@ -487,7 +487,7 @@ public:
         }
     }
 
-    //Видалення ребра з графу
+    //Г‚ГЁГ¤Г Г«ГҐГ­Г­Гї Г°ГҐГЎГ°Г  Г§ ГЈГ°Г ГґГі
     void remove_edge(int u, int v) {
         if (u >= 0 && u < num_vertex && v >= 0 && v < num_vertex && edge_exists(u, v)) {
             adj_matrix[u][v] = 0;
@@ -499,7 +499,7 @@ public:
         }
     }
 
-    //Вивід графу (матриці суміжності)
+    //Г‚ГЁГўВіГ¤ ГЈГ°Г ГґГі (Г¬Г ГІГ°ГЁГ¶Ві Г±ГіГ¬ВіГ¦Г­Г®Г±ГІВі)
     void print_graph() {
         for (int i = 0; i < num_vertex; ++i) {
             std::cout << "Vertex " << i << ": ";
@@ -510,7 +510,7 @@ public:
         }
     }
 
-    //Створення випадкового графу з n ребрами 
+    //Г‘ГІГўГ®Г°ГҐГ­Г­Гї ГўГЁГЇГ Г¤ГЄГ®ГўГ®ГЈГ® ГЈГ°Г ГґГі Г§ n Г°ГҐГЎГ°Г Г¬ГЁ 
     void create_random_graph(int n, int max_weight) {
         if (n <= 0 || max_weight < 0) {
             std::cout << "Error: Invalid parameters.\n";
@@ -531,7 +531,7 @@ public:
         }
     }
 
-    //Перевірка на зв'язність графу 
+    //ГЏГҐГ°ГҐГўВіГ°ГЄГ  Г­Г  Г§Гў'ГїГ§Г­ВіГ±ГІГј ГЈГ°Г ГґГі 
     bool is_connected() {
         if (directed) {
             std::cout << "Is directed graph." << std::endl;
@@ -546,7 +546,7 @@ public:
         return true;
     }
 
-    //Пошук усіх компонент зв'язності
+    //ГЏГ®ГёГіГЄ ГіГ±ВіГµ ГЄГ®Г¬ГЇГ®Г­ГҐГ­ГІ Г§Гў'ГїГ§Г­Г®Г±ГІВі
     void find_connected_components(bool benchmark = false) {
         if (directed) {
             std::cout << "Is directed graph." << std::endl;
@@ -573,7 +573,7 @@ public:
         }
     }
 
-    //Перевірка ациклічності орієнтованого графа 
+    //ГЏГҐГ°ГҐГўВіГ°ГЄГ  Г Г¶ГЁГЄГ«ВіГ·Г­Г®Г±ГІВі Г®Г°ВіВєГ­ГІГ®ГўГ Г­Г®ГЈГ® ГЈГ°Г ГґГ  
     bool is_acyclic() {
         if (!directed) {
             std::cout << "Is undirected graph." << std::endl;
@@ -590,7 +590,7 @@ public:
         return !has_cycle;
     }
 
-    //Пошук в глибину 
+    //ГЏГ®ГёГіГЄ Гў ГЈГ«ГЁГЎГЁГ­Гі 
     void DFS(int vertex = 0, bool benchmark = false) {
         std::vector<bool> visited(num_vertex, false);
         DFS_util(vertex, visited, benchmark);
@@ -599,7 +599,7 @@ public:
         }
     }
 
-    //Прохід графа в глибину за найменшою вагою ребра
+    //ГЏГ°Г®ГµВіГ¤ ГЈГ°Г ГґГ  Гў ГЈГ«ГЁГЎГЁГ­Гі Г§Г  Г­Г Г©Г¬ГҐГ­ГёГ®Гѕ ГўГ ГЈГ®Гѕ Г°ГҐГЎГ°Г 
     void dfs_min_weight(bool benchmark = false) {
         std::vector<bool> visited(num_vertex, false);
         for (int i = 0; i < num_vertex; i++) {
@@ -610,7 +610,7 @@ public:
         if (!benchmark) std::cout << std::endl;
     }
 
-    //Алгоритм Флойда для знаходження найменшої відстані між усіма вершинами
+    //ГЂГ«ГЈГ®Г°ГЁГІГ¬ Г”Г«Г®Г©Г¤Г  Г¤Г«Гї Г§Г­Г ГµГ®Г¤Г¦ГҐГ­Г­Гї Г­Г Г©Г¬ГҐГ­ГёГ®Вї ГўВіГ¤Г±ГІГ Г­Ві Г¬ВіГ¦ ГіГ±ВіГ¬Г  ГўГҐГ°ГёГЁГ­Г Г¬ГЁ
     void al_floyde(bool benchmark = false) {
         std::vector<std::vector<double>> dis;
         dis = adj_matrix;
@@ -645,7 +645,7 @@ public:
 
     }
 
-    //Алгорит Дейкстри для пошуку наймешої відстані між однією вершиною і усіма іншими
+    //ГЂГ«ГЈГ®Г°ГЁГІ Г„ГҐГ©ГЄГ±ГІГ°ГЁ Г¤Г«Гї ГЇГ®ГёГіГЄГі Г­Г Г©Г¬ГҐГёГ®Вї ГўВіГ¤Г±ГІГ Г­Ві Г¬ВіГ¦ Г®Г¤Г­ВіВєГѕ ГўГҐГ°ГёГЁГ­Г®Гѕ Ві ГіГ±ВіГ¬Г  ВіГ­ГёГЁГ¬ГЁ
     void dijkstra(int start, bool benchmark = false) {
         if (start < 0 || start >= num_vertex) {
             std::cout << "Error: Invalid vertex.\n";
@@ -677,7 +677,7 @@ public:
         }
     }
 
-    //Топологічне сортування
+    //Г’Г®ГЇГ®Г«Г®ГЈВіГ·Г­ГҐ Г±Г®Г°ГІГіГўГ Г­Г­Гї
     void topological_sort(bool benchmark = false) {
         if (!directed) {
             std::cout << "Is undirected graph.\n";
@@ -697,7 +697,7 @@ public:
         }
     }
 
-    //Алгоритм побудови довільного кістякового дерева за допомогою пошука в глибину
+    //ГЂГ«ГЈГ®Г°ГЁГІГ¬ ГЇГ®ГЎГіГ¤Г®ГўГЁ Г¤Г®ГўВіГ«ГјГ­Г®ГЈГ® ГЄВіГ±ГІГїГЄГ®ГўГ®ГЈГ® Г¤ГҐГ°ГҐГўГ  Г§Г  Г¤Г®ГЇГ®Г¬Г®ГЈГ®Гѕ ГЇГ®ГёГіГЄГ  Гў ГЈГ«ГЁГЎГЁГ­Гі
     adj_matrix_graph build_spanning_forest() {
         if (!is_connected()) {
             std::cout << "Graph isn`t connected.\n";
