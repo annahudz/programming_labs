@@ -9,7 +9,7 @@ struct Node23 {
     Node23* children[4];
     Node23* parent;
 
-    Node23(int val) : count(1), parent(nullptr) {
+    Node23(Point val) : count(1), parent(nullptr) {
         keys[0] = val;
         for (int i = 0; i < 4; i++) children[i] = nullptr;
     }
@@ -71,7 +71,7 @@ private:
         }
     }
 
-    void inorder(Node23* n, void (*action)(int&)) {
+    void inorder(Node23* n, void (*action)(Point&)) {
         if (!n) return;
         inorder(n->children[0], action);
         if (action) action(n->keys[0]); else std::cout << n->keys[0] << " ";
@@ -82,10 +82,10 @@ private:
         }
     }
 
-    void rangeSearch(Node23* n, int min, int max) {
+    void rangeSearch(Node23* n, Point min, Point max) {
         if (!n) return;
         if (min < n->keys[0]) rangeSearch(n->children[0], min, max);
-        if (n->keys[0] >= min && n->keys[0] <= max) std::cout << n->keys[0] << " ";
+        if (!(n->keys[0] < min) && !(max < n->keys[0] )) std::cout << n->keys[0] << " ";
 
         if (n->count == 1) {
             if (max > n->keys[0]) rangeSearch(n->children[1], min, max);
@@ -107,7 +107,7 @@ public:
     Tree23() : root(nullptr) {}
     ~Tree23() { clear(root); }
 
-    void add(int val) {
+    void add(Point val) {
         if (!root) { root = new Node23(val); return; }
         Node23* curr = root;
         while (!curr->isLeaf()) {
@@ -125,7 +125,7 @@ public:
     void printRange(int min, int max) { rangeSearch(root, min, max); std::cout << std::endl; }
 
     void forEach(void (*action)(int&)) { inorder(root, action); }
-    Node23* removeFromNode(Node23* node, int value) {
+    Node23* removeFromNode(Node23* node, Point value) {
         if (!node) return nullptr;
         for (int i = 0; i < node->count; i++) {
             if (node->keys[i] == value) {
@@ -138,7 +138,7 @@ public:
             node->children[i] = removeFromNode(node->children[i], value);
         return node;
     }
-    void remove(int value) {
+    void remove(Point value) {
         if (!root) return;
         root = removeFromNode(root, value);
         if (root && root->count == 0) {
@@ -154,7 +154,13 @@ public:
     }
 
 
-    void fillRandom(int count, int minVal = 0, int maxVal = 100) {
-        for (int i = 0; i < count; i++) add(minVal + rand() % (maxVal - minVal + 1));
+void fillRandom(int n) {
+    for (int i = 0; i < n; i++) {
+        Point p;
+        p.x = (rand() % 1000) / 10.0; 
+        p.y = (rand() % 1000) / 10.0;
+        p.z = (rand() % 1000) / 10.0;
+        add(p); 
     }
+}
 };
