@@ -92,7 +92,7 @@ private:
         }
         else {
             if (min < n->keys[1] && max > n->keys[0]) rangeSearch(n->children[1], min, max);
-            if (n->keys[1] >= min && n->keys[1] <= max) std::cout << n->keys[1] << " ";
+            if (!(n->keys[1] <min) && !(max<n->keys[1] )) std::cout << n->keys[1] << " ";
             if (max > n->keys[1]) rangeSearch(n->children[2], min, max);
         }
     }
