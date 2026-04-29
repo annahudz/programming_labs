@@ -4,11 +4,11 @@
 #include <ctime>
 
 struct AVLNode {
-    int data;
+    Point data;
     AVLNode* left, * right;
     int height;
 
-    AVLNode(int val) : data(val), left(nullptr), right(nullptr), height(1) {}
+    AVLNode(Point val) : data(val), left(nullptr), right(nullptr), height(1) {}
 };
 
 class AVLTree {
@@ -63,7 +63,7 @@ private:
         return node;
     }
 
-    AVLNode* insert(AVLNode* node, int value) {
+    AVLNode* insert(AVLNode* node, Point value) {
         if (!node) return new AVLNode(value);
         if (value < node->data) node->left = insert(node->left, value);
         else if (value > node->data) node->right = insert(node->right, value);
@@ -77,7 +77,7 @@ private:
         return node;
     }
 
-    AVLNode* remove(AVLNode* node, int value) {
+    AVLNode* remove(AVLNode* node, Point value) {
         if (!node) return nullptr;
 
         if (value < node->data) node->left = remove(node->left, value);
@@ -95,7 +95,7 @@ private:
         return balanceNode(node);
     }
 
-    void inorder(AVLNode* node, void (*action)(int&)) {
+    void inorder(AVLNode* node, void (*action)(Point&)) {
         if (!node) return;
         inorder(node->left, action);
         if (action) action(node->data);
@@ -103,10 +103,10 @@ private:
         inorder(node->right, action);
     }
 
-    void rangeSearch(AVLNode* node, int min, int max) {
+    void rangeSearch(AVLNode* node, Point min, Point max) {
         if (!node) return;
         if (node->data > min) rangeSearch(node->left, min, max);
-        if (node->data >= min && node->data <= max) std::cout << node->data << " ";
+        if (!(node->data < min) && !(max<node->data )) std::cout << node->data << " ";
         if (node->data < max) rangeSearch(node->right, min, max);
     }
 
@@ -121,19 +121,23 @@ public:
     AVLTree() : root(nullptr) {}
     ~AVLTree() { clear(root); }
 
-    void add(int value) { root = insert(root, value); }
+    void add(Point value) { root = insert(root, value); }
 
-    void remove(int value) { root = remove(root, value); }
+    void remove(Point value) { root = remove(root, value); }
 
     void display() { inorder(root, nullptr); std::cout << std::endl; }
 
-    void printRange(int min, int max) { rangeSearch(root, min, max); std::cout << std::endl; }
+    void printRange(Point min, Point max) { rangeSearch(root, min, max); std::cout << std::endl; }
 
-    void forEach(void (*action)(int&)) { inorder(root, action); }
+    void forEach(void (*action)(Point&)) { inorder(root, action); }
 
-    void fillRandom(int count, int minVal = 0, int maxVal = 100) {
-        for (int i = 0; i < count; i++) {
-            add(minVal + rand() % (maxVal - minVal + 1));
-        }
+void fillRandom(int n) {
+    for (int i = 0; i < n; i++) {
+        Point p;
+        p.x = (rand() % 1000) / 10.0; // випадкове число з крапкою
+        p.y = (rand() % 1000) / 10.0;
+        p.z = (rand() % 1000) / 10.0;
+        add(p); // викликаємо метод додавання вже для Point
     }
+}
 };
