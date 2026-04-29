@@ -3,11 +3,11 @@
 #include <cstdlib>
 
 struct TreeNode {
-    int data;
+    Point data;
     TreeNode* left;
     TreeNode* right;
 
-    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+    TreeNode(Point val) : data(val), left(nullptr), right(nullptr) {}
 };
 
 class BinarySearchTree {
@@ -15,7 +15,7 @@ private:
     TreeNode* root;
 
 
-    TreeNode* insert(TreeNode* node, int value) {
+    TreeNode* insert(TreeNode* node, Point value) {
         if (node == nullptr) return new TreeNode(value);
 
         if (value < node->data)
@@ -33,7 +33,7 @@ private:
     }
 
 
-    TreeNode* remove(TreeNode* node, int value) {
+    TreeNode* remove(TreeNode* node, Point value) {
         if (node == nullptr) return nullptr;
 
         if (value < node->data)
@@ -60,7 +60,7 @@ private:
     }
 
 
-    void inorder(TreeNode* node, void (*action)(int&)) const {
+    void inorder(TreeNode* node, void (*action)(Point&)) const {
         if (node == nullptr) return;
         inorder(node->left, action);
         if (action) action(node->data);
@@ -69,7 +69,7 @@ private:
     }
 
 
-    void rangeSearch(TreeNode* node, int min, int max) const {
+    void rangeSearch(TreeNode* node, Point min, Point max) const {
         if (node == nullptr) return;
         if (node->data > min) rangeSearch(node->left, min, max);
         if (node->data >= min && node->data <= max) std::cout << node->data << " ";
@@ -86,11 +86,11 @@ private:
 public:
     BinarySearchTree() : root(nullptr) {}
 
-    void add(int value) { root = insert(root, value); }
+    void add(Point value) { root = insert(root, value); }
 
-    void remove(int value) { root = remove(root, value); }
+    void remove(Point value) { root = remove(root, value); }
 
-    bool contains(int value) const {
+    bool contains(Point value) const {
         TreeNode* curr = root;
         while (curr) {
             if (curr->data == value) return true;
@@ -100,25 +100,28 @@ public:
     }
 
     void display() const {
-        if (!root) std::cout << "Дерево порожнє.";
+        if (!root) std::cout << "Tree is empty.";
         inorder(root, nullptr);
         std::cout << std::endl;
     }
 
-    void printRange(int min, int max) const {
+    void printRange(Point min, Point max) const {
         rangeSearch(root, min, max);
         std::cout << std::endl;
     }
 
-    void forEach(void (*action)(int&)) {
+    void forEach(void (*action)(Point&)) {
         inorder(root, action);
     }
 
-    void fillRandom(int count, int minVal = 0, int maxVal = 100) {
-        for (int i = 0; i < count; i++) {
-            add(minVal + rand() % (maxVal - minVal + 1));
-        }
+   void fillRandom(int count) {
+    for (int i = 0; i < n; i++) {
+        Point p;
+        p.x = (rand() % 1000) / 10.0; 
+        p.y = (rand() % 1000) / 10.0;
+        p.z = (rand() % 1000) / 10.0;
+        add(p); 
     }
-
+}
     ~BinarySearchTree() { clear(root); }
 };
