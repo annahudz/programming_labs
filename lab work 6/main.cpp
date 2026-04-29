@@ -11,24 +11,50 @@
 #include "B23Tree.h"    
 
 using namespace std;
+#include <iostream>
+#include <iomanip>
 
-void doubleValue(int& x) { x *= 2; }
+struct Point {
+    double x, y, z;
+
+    bool operator<(const Point& other) const {
+        if (x != other.x) return x < other.x;
+        if (y != other.y) return y < other.y;
+        return z < other.z;
+    }
+
+    bool operator>(const Point& other) const { return other < *this; }
+    
+    bool operator==(const Point& other) const {
+        return x == other.x && y == other.y && z == other.z;
+    }
+
+    bool operator!=(const Point& other) const { return !(*this == other); }
+};
+
+std::ostream& operator<<(std::ostream& os, const Point& p) {
+    os << "(" << std::fixed << std::setprecision(1) << p.x 
+       << ", " << p.y << ", " << p.z << ")";
+    return os;
+}
 
 template <typename T>
-void handleInteraction(T& structure, string name) {
-    int choice, val, v1, v2;
+void handleInteraction(T& structure,string name) {
+    int choice;
+    Point p,p1,p2;
     while (true) {
         cout << "\n--- [" << name << "] SETTINGS ---" << endl;
-        cout << "1. Add Element\n2. Remove Element\n3. Range Search\n4. Display Structure\n5. Random Fill\n0. Back\n>> ";
+        cout << "1. Add Point\n2. Remove Point\n3. Range Search\n4. Display Structure\n5. Random Fill\n0. Back\n>> ";
         if (!(cin >> choice)) { cin.clear(); cin.ignore(1000, '\n'); continue; }
         if (choice == 0) break;
 
         switch (choice) {
-        case 1: cout << "Enter value: "; cin >> val; structure.add(val); break;
-        case 2: cout << "Enter value to remove: "; cin >> val; structure.remove(val); break;
-        case 3: cout << "Enter Min and Max: "; cin >> v1 >> v2; structure.printRange(v1, v2); break;
+        case 1: cout << "X Y Z: "; cin >> p.x>>p.y>>p.z; structure.add(p); break;
+        case 2: cout << "Enter X Y Z  to remove: "; cin >>p.x>>p.y>>p.z ; structure.remove(p); break;
+        case 3:cout << "Enter Max (X Y Z): "; cin >> p1.x>>p1.y>>p1.z; structure.printRange(p1 ); break;
+            cout << "Enter Min (X Y Z): "; cin >>p2.x>>p2.y>>p2.z; structure.printRange(p2); break;
         case 4: structure.display(); break;
-        case 5: cout << "Enter count: "; cin >> val; structure.fillRandom(val); break;
+        case 5: cout << "Enter count: "; cin >> n; structure.fillRandom(n); break;
         }
         if (choice == 1 || choice == 2 || choice == 5) {
             cout << "Current structure state: "; structure.display();
@@ -39,7 +65,7 @@ template <typename T>
 void runDemo(string name) {
     T obj;
     cout << "\n>>> DEMONSTRATION FOR " << name << " <<<\n";
-    int vals[] = { 50, 25, 75, 10, 30 };
+    int vals[] = { {10,1,1}, {5,2,2}, {20,3,3}};
 
     cout << "Step 1: Adding elements sequentially:\n";
     for (int v : vals) {
@@ -48,8 +74,8 @@ void runDemo(string name) {
         obj.display();
     }
 
-    cout << "\nStep 2: Removing element 25:\n";
-    obj.remove(25);
+    cout << "\nStep 2: Removing element "<<vals[1]<<":\n";
+    obj.remove(vals[1]);
     obj.display();
     cout << "--------------------------------\n";
 }
