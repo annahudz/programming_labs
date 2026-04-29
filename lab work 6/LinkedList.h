@@ -6,8 +6,10 @@
 using namespace std;
 
 struct Node {
-    int data;
+    Point data;
     Node* next;
+Node (Point val, Node* n = nullptr): data(val), next(n){
+}
 };
 
 class LinkedList {
@@ -17,7 +19,7 @@ private:
 public:
     LinkedList() : head(nullptr) {}
 
-    void add(int value) {
+    void add(Point value) {
         Node* newNode = new Node{ value, nullptr };
         if (!head) {
             head = newNode;
@@ -28,13 +30,17 @@ public:
         temp->next = newNode;
 
     }
-    void fillRandom(int count, int minVal = 0, int maxVal = 100) {
-        for (int i = 0; i < count; i++) {
-            add(rand() % (maxVal - minVal + 1) + minVal);
-        }
+ void fillRandom(int n) {
+    for (int i = 0; i < n; i++) {
+        Point p;
+        p.x = (rand() % 1000) / 10.0; 
+        p.y = (rand() % 1000) / 10.0;
+        p.z = (rand() % 1000) / 10.0;
+        add(p);
     }
+}
 
-    void remove(int value) {
+    void remove(Point value) {
         if (!head) return;
         if (head->data == value) {
             Node* temp = head;
@@ -52,17 +58,17 @@ public:
     }
 
 
-    void printRange(int min, int max) {
+    void printRange(Point min, Point max) {
         Node* temp = head;
         bool found = false;
         while (temp) {
-            if (temp->data >= min && temp->data <= max) {
+            if (!(temp->data < min) && !(max < temp->data)) {
                 std::cout << temp->data << " ";
                 found = true;
             }
             temp = temp->next;
         }
-        if (!found) std::cout << "Елементів не знайдено";
+        if (!found) std::cout << "Elements not found";
         std::cout << std::endl;
     }
 
@@ -77,7 +83,7 @@ public:
     }
 
 
-    void forEach(void (*action)(int&)) {
+    void forEach(void (*action)(Point&)) {
         Node* temp = head;
         while (temp) {
             action(temp->data);
