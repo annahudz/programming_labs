@@ -72,7 +72,7 @@ private:
     void rangeSearch(TreeNode* node, Point min, Point max) const {
         if (node == nullptr) return;
         if (node->data > min) rangeSearch(node->left, min, max);
-        if (node->data >= min && node->data <= max) std::cout << node->data << " ";
+        if (!(node->data < min) && !(max<node->data)) std::cout << node->data << " ";
         if (node->data < max) rangeSearch(node->right, min, max);
     }
 
